@@ -1,31 +1,35 @@
-name: "Comment on PR"
-
-on:
+name: Comment on PR
+'on':
   pull_request_target:
-    types: [opened, reopened]
-
+    types:
+    - opened
+    - reopened
 jobs:
   thanks-and-hint-to-document:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     permissions:
       pull-requests: write
     name: Say thanks for the PR and hint to document
     steps:
-      - name: comment on the pull request
-        uses: hasura/comment-progress@v2.3.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          number: ${{ github.event.number }}
-          id: thanks-and-hint-to-document
-          recreate: true
-          message: |
-            Thanks for your this PR.  :pray: 
-            Please check again for your PR changes whether contains any usage/api/configuration change such as `Add new API `, `Add new configuration`, `Change default value of configuration`.
-            If so, please add or update documents(markdown type) in `docs/next/` for repository [nacos-group/nacos-group.github.io](https://github.com/nacos-group/nacos-group.github.io/tree/develop-astro-nacos/src/content/docs/next)
-            
-            ---
-            
-            感谢您提交的PR。 :pray: 
-            请再次查看您的PR内容，确认是否包含任何使用方式/API/配置参数的变更，如：`新增API`、`新增配置参数`、`修改默认配置`等操作。
-            如果是，请确保在提交之前，在仓库[nacos-group/nacos-group.github.io](https://github.com/nacos-group/nacos-group.github.io/tree/develop-astro-nacos/src/content/docs/next)中的`docs/next/`目录下添加或更新文档（markdown格式）。
+    - name: comment on the pull request
+      uses: hasura/comment-progress@v2.3.0
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        repository: ${{ github.repository }}
+        number: ${{ github.event.number }}
+        id: thanks-and-hint-to-document
+        recreate: true
+        message: "Thanks for your this PR.  :pray: \nPlease check again for your PR\
+          \ changes whether contains any usage/api/configuration change such as `Add\
+          \ new API `, `Add new configuration`, `Change default value of configuration`.\n\
+          If so, please add or update documents(markdown type) in `docs/next/` for\
+          \ repository [nacos-group/nacos-group.github.io](https://github.com/nacos-group/nacos-group.github.io/tree/develop-astro-nacos/src/content/docs/next)\n\
+          \n---\n\n\u611F\u8C22\u60A8\u63D0\u4EA4\u7684PR\u3002 :pray: \n\u8BF7\u518D\
+          \u6B21\u67E5\u770B\u60A8\u7684PR\u5185\u5BB9\uFF0C\u786E\u8BA4\u662F\u5426\
+          \u5305\u542B\u4EFB\u4F55\u4F7F\u7528\u65B9\u5F0F/API/\u914D\u7F6E\u53C2\u6570\
+          \u7684\u53D8\u66F4\uFF0C\u5982\uFF1A`\u65B0\u589EAPI`\u3001`\u65B0\u589E\
+          \u914D\u7F6E\u53C2\u6570`\u3001`\u4FEE\u6539\u9ED8\u8BA4\u914D\u7F6E`\u7B49\
+          \u64CD\u4F5C\u3002\n\u5982\u679C\u662F\uFF0C\u8BF7\u786E\u4FDD\u5728\u63D0\
+          \u4EA4\u4E4B\u524D\uFF0C\u5728\u4ED3\u5E93[nacos-group/nacos-group.github.io](https://github.com/nacos-group/nacos-group.github.io/tree/develop-astro-nacos/src/content/docs/next)\u4E2D\
+          \u7684`docs/next/`\u76EE\u5F55\u4E0B\u6DFB\u52A0\u6216\u66F4\u65B0\u6587\
+          \u6863\uFF08markdown\u683C\u5F0F\uFF09\u3002\n"
